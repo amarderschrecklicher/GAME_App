@@ -4,7 +4,7 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="#F1F2F3"
+    app:cardBackgroundColor="#FF6E40"
     app:cardCornerRadius="4dp">
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:textColor="#FFFF00"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/cardView"
-            app:layout_constraintEnd_toStartOf="@id/game_title_textview"
+            app:layout_constraintEnd_toStartOf="@id/item_title_textview"
             app:layout_constraintTop_toTopOf="@id/cardView" />
 
         <LinearLayout
@@ -29,16 +29,17 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/game_title_textview"
+                android:id="@+id/item_title_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textAlignment="viewStart"
                 android:textColor="@color/design_default_color_secondary_variant"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/game_platform_textview"
                 app:layout_constraintStart_toEndOf="@id/game_rating_textview"
-                app:layout_constraintTop_toBottomOf="@id/game_title_textview"
+                app:layout_constraintTop_toBottomOf="@id/item_title_textview"
                 tools:ignore="RtlCompat" />
 
             <TextView

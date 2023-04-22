@@ -13,8 +13,6 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.game.GameData
-import com.example.game.HomeActivity
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.CoreMatchers.`is` as Is
@@ -41,7 +39,7 @@ class TestLayout {
     }
 
     @get:Rule
-    var homeRule:ActivityScenarioRule<HomeActivity> = ActivityScenarioRule(HomeActivity::class.java)
+    var homeRule:ActivityScenarioRule<HomeFragment> = ActivityScenarioRule(HomeFragment::class.java)
 
     @Test
     fun elementsTest(){
@@ -55,7 +53,7 @@ class TestLayout {
     @Test
     fun recyclerViewTest(){
         onView(withId(R.id.game_list)).perform(RecyclerViewActions.scrollToPosition<ViewHolder>(0)).check(matches(allOf(
-            hasDescendant(withId(R.id.game_title_textview)),
+            hasDescendant(withId(R.id.item_title_textview)),
             hasDescendant(withId(R.id.game_rating_textview)),
             hasDescendant(withId(R.id.release_date)),
             hasDescendant(withId(R.id.game_platform_textview)),
@@ -63,11 +61,11 @@ class TestLayout {
         )))
 
         onView(withId(R.id.game_list)).perform(RecyclerViewActions.scrollToPosition<ViewHolder>(0)).check(
-            matches(hasDescendant(withId(R.id.game_title_textview)).also { isTopAlignedWith(
-                withChild(withId(R.id.game_title_textview))
+            matches(hasDescendant(withId(R.id.item_title_textview)).also { isTopAlignedWith(
+                withChild(withId(R.id.item_title_textview))
             ) }))
         onView(withId(R.id.game_list)).perform(RecyclerViewActions.scrollToPosition<ViewHolder>(0)).check(
-            matches(hasDescendant(withId(R.id.game_title_textview)).also { isCompletelyRightOf(
+            matches(hasDescendant(withId(R.id.item_title_textview)).also { isCompletelyRightOf(
                 withId(R.id.game_rating_textview)
             ) }))
         onView(withId(R.id.game_list)).perform(RecyclerViewActions.scrollToPosition<ViewHolder>(0)).check(

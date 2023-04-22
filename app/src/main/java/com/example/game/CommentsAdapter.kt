@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
        return if(viewType == 0) {
-             val view = LayoutInflater
+           val view = LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.bar_review, parent, false)
-                BarViewHolder(view)
+                 BarViewHolder(view)
         }else {
             val view = LayoutInflater
                 .from(parent.context)
