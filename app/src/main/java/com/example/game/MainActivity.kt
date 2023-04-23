@@ -1,57 +1,42 @@
 package com.example.game
 
 import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.annotation.ContentView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isInvisible
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
-import org.hamcrest.comparator.ComparatorMatcherBuilder
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity(),DataListener {
 
     private lateinit var menu1: MenuItem
     private lateinit var menu2: MenuItem
-
+    lateinit var navHostFragment: NavHostFragment
+    lateinit var navController : NavController
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-
-            if(HomeFragment.gameToShowDetails == null)
-             HomeFragment.gameToShowDetails = GameData.getAll()[0]
-            navController.popBackStack()
-
-        }
-
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+             navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            navController = navHostFragment.navController
             val navView: BottomNavigationView = findViewById(R.id.bottom_nav)
             navView.setupWithNavController(navController)
             menu1 = navView.menu.findItem(R.id.homeItem)
             menu2 = navView.menu.findItem(R.id.gameDetailsItem)
             menu2.isEnabled = false
             menu1.isEnabled = false
+            navView.isEnabled = false
 
             navController.addOnDestinationChangedListener { _, destination, _ ->
+
+                navView.isEnabled = true
                 if (destination.id == R.id.homeItem) {
                     menu1.isEnabled = false
                     if (HomeFragment.gameToShowDetails != null)
@@ -64,10 +49,8 @@ class MainActivity : AppCompatActivity(),DataListener {
                         navHostFragment.findNavController().navigate(R.id.homeItem)
                         true
                     }
-
                 }
             }
-
         }
     }
 
@@ -83,4 +66,10 @@ class MainActivity : AppCompatActivity(),DataListener {
         details.navController.navigate(destination)
     }
 
+  /*  override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+            navController.popBackStack()
+    }
+*/
 }
