@@ -16,17 +16,23 @@ class MainActivity : AppCompatActivity(),DataListener {
     private lateinit var menu1: MenuItem
     private lateinit var menu2: MenuItem
     lateinit var navHostFragment: NavHostFragment
-    lateinit var navController : NavController
+    lateinit  var navController : NavController
+    lateinit var navView : BottomNavigationView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
             if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-             navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
             navController = navHostFragment.navController
-            val navView: BottomNavigationView = findViewById(R.id.bottom_nav)
+            if(navController.currentDestination!!.id == R.id.gameDetailsItem)
+                navController.popBackStack()
+
+            navView = findViewById(R.id.bottom_nav)
             navView.setupWithNavController(navController)
             menu1 = navView.menu.findItem(R.id.homeItem)
             menu2 = navView.menu.findItem(R.id.gameDetailsItem)
@@ -35,7 +41,6 @@ class MainActivity : AppCompatActivity(),DataListener {
             navView.isEnabled = false
 
             navController.addOnDestinationChangedListener { _, destination, _ ->
-
                 navView.isEnabled = true
                 if (destination.id == R.id.homeItem) {
                     menu1.isEnabled = false
@@ -45,13 +50,10 @@ class MainActivity : AppCompatActivity(),DataListener {
                     menu1.isEnabled = true
                     menu2.isEnabled = false
 
-                    menu1.setOnMenuItemClickListener {
-                        navHostFragment.findNavController().navigate(R.id.homeItem)
-                        true
-                    }
                 }
             }
         }
+
     }
 
     override fun refreshDetails(item: Game) {
@@ -61,15 +63,10 @@ class MainActivity : AppCompatActivity(),DataListener {
     }
 
     override fun showDetails() {
-        val details = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val destination = HomeFragmentDirections.homeToDetails()
-        details.navController.navigate(destination)
+        menu2.isEnabled = true
+        navView.selectedItemId = menu2.itemId
+        navView.performClick()
     }
 
-  /*  override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-            navController.popBackStack()
-    }
-*/
+
 }
