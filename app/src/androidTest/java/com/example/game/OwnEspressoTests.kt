@@ -41,9 +41,9 @@ class OwnEspressoTests {
         }
     }
 
-    /*
-    Funkcija za pritiskanje željene igrice game liste u HomeFragment
-     */
+
+   // Funkcija za pritiskanje željene igrice game liste u HomeFragment
+
 
     fun clickGameItem(game :Game){
         Espresso.onView(withId(R.id.game_list)).perform(
@@ -62,14 +62,14 @@ class OwnEspressoTests {
 
     var igre = GameData.getAll()
 
-    /*
-        -U ovome testu na početku provjeravamo da li se prikazuje layout_main pomoću funkcije isDisplayed(), te zatim da li dugmad od bottom
-         bara ne rade što je zahtjev po spirali funckijom isNotEnabled().
-        -Zatim provjeramo kada uđemo u gameDetails fragment da li je novi layout onakav kakav je zamišljen, tj., gdje se koji podatak o igri
-         nalazi na ekranu.
-        -Te na kraju provjeravamo da li se bottom bar nalazi na samome dnu i provjeravamo da li su prelaskom u landscape, naši fragmenti
-         podjeljeni u 40:60 omjeru pomoću funckije check(matches(isDisplayingAtLeast(40))).
-     */
+
+     //   -U ovome testu na početku provjeravamo da li se prikazuje layout_main pomoću funkcije isDisplayed(), te zatim da li dugmad od bottom
+     //    bara ne rade što je zahtjev po spirali funckijom isNotEnabled().
+     //   -Zatim provjeramo kada uđemo u gameDetails fragment da li je novi layout onakav kakav je zamišljen, tj., gdje se koji podatak o igri
+     //    nalazi na ekranu.
+     //   -Te na kraju provjeravamo da li se bottom bar nalazi na samome dnu i provjeravamo da li su prelaskom u landscape, naši fragmenti
+     //    podjeljeni u 40:60 omjeru pomoću funckije check(matches(isDisplayingAtLeast(40))).
+
 
 
     @Test
@@ -122,16 +122,16 @@ class OwnEspressoTests {
 
     }
 
-    /*
-            -U ovome testu provjeravamo pokretanje aplikacije iz landscape mode, te i sami layout game details u landscape što podrazumjeva
-              provjeru pozicije svih opisa igrice na ekranu.
-            -Zatim pritiskom na svaku igricu liste gameList u HomeFragment s lijeve strane, provjeravamo da li se zaista ona pojavljuje u
-             GameDetailsFragment fragmentu sa desne strane, pomoću funkcije clickGameItem(game :Game).
-            -Zatim peralazimo u portrait mode provjeravamo da li se prikazuje HomeFragment (sopsteveni zahtjev), funckijom isDisplayed().
-             Također, klikom na desno dugme bottombar-a i ulaskom u GameDetailsFragment, provjeravamo da li se prikazuju detalji one
-             zadnje igre pritisnute u landscape mode. Za tu provjeru gledali smo da li se detalji igre poklapaju sa onom zadnjom pritisnutom,
-             pomoću funckije matches.(Regex.fromLiteral(igre[0].)).
-     */
+
+       //     -U ovome testu provjeravamo pokretanje aplikacije iz landscape mode, te i sami layout game details u landscape što podrazumjeva
+       //      provjeru pozicije svih opisa igrice na ekranu.
+       //     -Zatim pritiskom na svaku igricu liste gameList u HomeFragment s lijeve strane, provjeravamo da li se zaista ona pojavljuje u
+       //      GameDetailsFragment fragmentu sa desne strane, pomoću funkcije clickGameItem(game :Game).
+       //     -Zatim peralazimo u portrait mode provjeravamo da li se prikazuje HomeFragment (sopsteveni zahtjev), funckijom isDisplayed().
+       //      Također, klikom na desno dugme bottombar-a i ulaskom u GameDetailsFragment, provjeravamo da li se prikazuju detalji one
+       //      zadnje igre pritisnute u landscape mode. Za tu provjeru gledali smo da li se detalji igre poklapaju sa onom zadnjom pritisnutom,
+       //      pomoću funckije matches.(Regex.fromLiteral(igre[0].)).
+
 
     @Test
     fun test2(){
@@ -174,13 +174,13 @@ class OwnEspressoTests {
 
     }
 
-    /*
-    -Počinjemo iz portrait mode te klikom na drugu igru liste ulazimo u detalje igre, te provjeravamo zatim kada odatle prelazimo u landscape
-     da li će ta igra biti prikazana.
-    -Odatle biramo petu igru i vraćamo se u portrait mode, pa vršimo provjeru da li se aplikacija vraća u HomeFragment (sopstveni zahtjev).
-    -Također usput provjeravamo da li je search button deseno od searchbar-a. Pritiskom na drugo dugme bottombar-a, provjeravamo
-     da li će biti prikazana peta igra.
-     */
+
+    //    -Počinjemo iz portrait mode te klikom na drugu igru liste ulazimo u detalje igre, te provjeravamo zatim kada odatle prelazimo u landscape
+    //     da li će ta igra biti prikazana.
+    //    -Odatle biramo petu igru i vraćamo se u portrait mode, pa vršimo provjeru da li se aplikacija vraća u HomeFragment (sopstveni zahtjev).
+    //    -Također usput provjeravamo da li je searchbar-a lijevo od search button, u portrait pa kasnije u landscape mode.
+    //    -Pritiskom na drugo dugme bottombar-a, provjeravamo da li će biti prikazana peta igra.
+
 
 
     @Test
