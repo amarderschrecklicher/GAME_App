@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.game'
+    namespace 'ba.etf.rma23.projekat'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.game"
+        applicationId "ba.etf.rma23.projekat"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -22,6 +22,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            buildConfigField 'String',"CLIENT_ID","\"u2a8d26fa2kq69sopf721alexuo3a5\""
+            buildConfigField 'String',"ACCESS_TOKEN","\"Bearer d3he7hmi0x8eeg0iq3ve5obb3ihftn\""
+            buildConfigField 'String',"ACCOUNT_HASH","\"f14630af-7476-4678-98d7-546f9404fff2\""
+            buildConfigField 'String',"STUDENT_EMIAL","\"atahirovic3@etf.unsa.ba\""
         }
     }
     compileOptions {
@@ -53,4 +59,10 @@ dependencies {
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:+"
+    implementation 'com.github.bumptech.glide:glide:+'
+    annotationProcessor 'com.github.bumptech.glide:compiler:+'
+    implementation 'com.squareup.retrofit2:retrofit:+'
+    implementation 'com.squareup.retrofit2:converter-gson:+'
 }

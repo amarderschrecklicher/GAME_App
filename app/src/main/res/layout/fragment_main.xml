@@ -45,6 +45,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="12dp"
         android:clipToPadding="false"
+        android:paddingTop="5dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +66,42 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline8"
         app:layout_constraintTop_toBottomOf="@+id/search_query_edittext" />
+
+    <CheckBox
+        android:id="@+id/favoriteBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/favorites"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/guideline4" />
+
+
+    <CheckBox
+        android:id="@+id/sortBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/sort"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline8"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="@id/guideline4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -100,6 +136,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.14" />
+        app:layout_constraintGuide_percent="0.13953489" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

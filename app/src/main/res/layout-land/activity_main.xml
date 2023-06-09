@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/land_host_fragment"
-        class="com.example.game.HomeFragment"
+        class="ba.etf.rma23.projekat.HomeFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
