@@ -36,8 +36,8 @@ class GameListAdapter (
         holder.gameTitle.text = games[position].name
         holder.itemView.setOnClickListener{ onItemClicked(games[position]) }
         holder.gameRating.text = games[position].rating.toString().substring(0,4)
-        holder.gameDate.text = games[position].releaseDate!!
-        holder.gamePlatform.text = games[position].platform!!
+        holder.gameDate.text = games[position]?.releaseDate
+        holder.gamePlatform.text = games[position]?.platform
         val fav = holder.addFavButton
 
         if(games[position].favorite)
@@ -64,8 +64,6 @@ class GameListAdapter (
                 fav.text = "Remove from Fav"
                 fav.setBackgroundColor(Color.MAGENTA)
                 val scope = CoroutineScope(Job() + Dispatchers.Main)
-                AccountApiConfig.favoriteGames!!.add(games[position])
-                games[position].favorite = true
                 scope.launch{
                     AccountGamesRepository.saveGame(games[position])
                 }
@@ -74,7 +72,7 @@ class GameListAdapter (
         }
 
         val context = holder.gameLogo.context
-        Glide.with(context).load("https:" + games[position].attributesImage!!).into(holder.gameLogo)
+        Glide.with(context).load("https:" + games[position]?.attributesImage).into(holder.gameLogo)
     }
     fun updateGames(games: List<Game>) {
         this.games = games

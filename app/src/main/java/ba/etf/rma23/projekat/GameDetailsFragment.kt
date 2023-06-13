@@ -60,13 +60,13 @@ class GameDetailsFragment : Fragment() {
       fun populateDetails() {
         game = gameToShowDetails!!
         gameTitle.text=game.name
-        gameDate.text= game.releaseDate!!
-        gameGenre.text=game.genre!!
-        gameRating.text= game.esrbRating!!
-        gamePlatform.text = game.platform!!
-        gameDeveloper.text = game.developer!!
-        gamePublisher.text = game.developer!!
-        gameDescription.text = game.description
+        gameDate.text= game?.releaseDate
+        gameGenre.text=game?.genre
+        gameRating.text= game?.esrbRating
+        gamePlatform.text = game?.platform
+        gameDeveloper.text = game?.developer
+        gamePublisher.text = game?.developer
+        gameDescription.text = game?.description
 
         reviewsAdapter = CommentsAdapter(arrayListOf())
         reviewsList.adapter = reviewsAdapter

@@ -15,13 +15,13 @@ class AccountApiConfig {
 
     interface Api {
         @POST("account/{accountHash}/game")
-        suspend fun addGame(@Body game: FavoriteGame, @Path("accountHash") accountHash: String):Response<AddGame>
+        suspend fun addGame(@Path("accountHash") accountHash: String, @Body game: FavoriteGame):Response<AddGame>
 
         @GET("account/{accountHash}/games")
         suspend fun getGames(@Path("accountHash") accountHash: String): Response<List<AddGame>>
 
         @DELETE("account/{accountHash}/game/{gid}/")
-        suspend fun deleteGame(@Path("gid",) gameId: Int,@Path("accountHash") accountHash: String): Response<SavedGame>
+        suspend fun deleteGame(@Path("gid",) gameId: Int,@Path("accountHash") accountHash: String): Response<Game>
 
         @DELETE("account/{accountHash}/game")
         suspend fun deleteGames(@Path("accountHash") accountHash: String): Response<Boolean>

@@ -47,6 +47,7 @@ open class HomeFragment : Fragment() {
          searchText = view.findViewById(R.id.search_query_edittext)
          gamesAdapter = GameListAdapter(arrayListOf()) { game -> showGameDetails(game) }
          allGames.adapter=gamesAdapter
+
          getFavorites()
 
         favoriteBox.setOnCheckedChangeListener {
@@ -58,9 +59,12 @@ open class HomeFragment : Fragment() {
                  }
         }
         searchButton.setOnClickListener{
+            val scope = CoroutineScope(Job() + Dispatchers.Main)
+            scope.launch {
                 favoriteBox.isChecked = false
                 sortBox.isChecked = false
                 onSearchClick()
+            }
         }
          sortBox.setOnCheckedChangeListener { _, isChecked ->
              if(isChecked)
@@ -87,19 +91,21 @@ open class HomeFragment : Fragment() {
         gamesAdapter.updateGames(gamesList!!)
     }
 
-    private fun onSearchClick() {
-        search(searchText.text.toString());
+    private  fun onSearchClick() {
+
+            search(searchText.text.toString());
+            gamesAdapter.updateGames(gamesList!!)
+
     }
-    private fun searchDone(games:List<Game>){
+    private fun searchDone(){
         val toast = Toast.makeText(context, "Search done", Toast.LENGTH_SHORT)
         toast.show()
-        gamesAdapter.updateGames(games)
     }
-    private fun search(query: String){
+    private  fun search(query: String){
         val scope = CoroutineScope(Job() + Dispatchers.Main)
         scope.launch{
             when (val result = GamesRepository.getGamesByName(query)) {
-                else -> searchDone(result)
+                else -> searchDone()
             }
         }
     }
