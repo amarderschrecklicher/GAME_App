@@ -3,6 +3,7 @@ package ba.etf.rma23.projekat.data.repositories
 import ba.etf.rma23.projekat.AddGame
 import ba.etf.rma23.projekat.FavoriteGame
 import ba.etf.rma23.projekat.Game
+import ba.etf.rma23.projekat.GameReview
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,13 +14,13 @@ class ReviewsApiConfig {
     interface Api {
 
         @POST("account/{accountHash}/game/{gid}/gamereview")
-        suspend fun addReview(@Path("gid",) gameId: Int, @Path("accountHash") accountHash: String): Response<Game>
+        suspend fun addReview(@Path("gid",) gameId: Int, @Path("accountHash")accountHash: String,@Body review : GameReview) : Response<GameReview>
 
         @GET("game/{gid}/gamereviews")
-        suspend fun getReview(@Path("gid",) gameId: Int, @Path("accountHash") accountHash: String): Response<Game>
+        suspend fun getReview(@Path("gid",) gameId: Int, @Path("accountHash") accountHash: String): Response<List<GameReview>>
 
         @DELETE("account/{accountHash}/gamereviews")
-        suspend fun deleteReview(@Path("accountHash") accountHash: String): Response<Boolean>
+        suspend fun deleteReview(@Path("accountHash") accountHash: String): Response<GameReview>
 
     }
 

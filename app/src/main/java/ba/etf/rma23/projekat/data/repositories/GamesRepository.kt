@@ -1,11 +1,13 @@
 package ba.etf.rma23.projekat.data.repositories
 
+import android.annotation.SuppressLint
 import ba.etf.rma23.projekat.Game
 import ba.etf.rma23.projekat.HomeFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 object GamesRepository {
+     @SuppressLint("SuspiciousIndentation")
      suspend fun getGamesByName(name:String):List<Game>{
          return withContext(Dispatchers.IO) {
              val response = IGDBApiConfig.ApiAdapter.retrofit.getGames(IGDBApiConfig.FIELDS + "search \"$name\";limit 10;")
