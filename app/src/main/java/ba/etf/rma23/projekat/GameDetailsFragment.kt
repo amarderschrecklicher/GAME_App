@@ -101,8 +101,6 @@ class GameDetailsFragment : Fragment() {
                     }
                 }
             gameToShowDetails!!.userImpressions = list
-            //    val db = Database.getInstance(requireContext())
-              //  db!!.reviewDAO().insertAll(GameReview(0,"",1,false,"",""))
 
             }
         }

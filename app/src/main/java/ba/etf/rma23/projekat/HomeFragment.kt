@@ -1,6 +1,10 @@
 package ba.etf.rma23.projekat
 
+import android.content.Context
 import android.content.res.Configuration
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
@@ -42,6 +46,7 @@ open class HomeFragment : Fragment() {
             LinearLayoutManager.VERTICAL,
             false
         )
+
          searchButton = view.findViewById(R.id.search_button)
          favoriteBox = view.findViewById(R.id.favoriteBox)
          sortBox = view.findViewById(R.id.sortBox)
