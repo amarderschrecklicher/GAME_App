@@ -1,7 +1,9 @@
 package ba.etf.rma23.projekat.data.repositories
 
+import android.annotation.SuppressLint
 import android.content.Context
-import ba.etf.rma23.projekat.GameReview
+import androidx.test.core.app.ApplicationProvider
+import ba.etf.rma23.projekat.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 object GameReviewsRepository {
@@ -18,24 +20,28 @@ object GameReviewsRepository {
         }
     }
 
-    suspend fun sendOfflineReviews(context: Context,review : GameReview):Int{
+    @SuppressLint("SuspiciousIndentation")
+    suspend fun sendOfflineReviews(context: Context):Int{
         return withContext(Dispatchers.IO) {
             try {
                 val db = Database.getInstance(context)
                 val reviews = db!!.reviewDAO().getAll().filter { !it.online }
                 var sent = 0
                 for(review in reviews) {
-                    if(ReviewsApiConfig.ApiAdapter.retrofit.addReview(review.gameId!!,AccountApiConfig.accountHash,review).isSuccessful)
+                    if(ReviewsApiConfig.ApiAdapter.retrofit.addReview(review.gameId!!,AccountApiConfig.accountHash,review).isSuccessful) {
                         sent += 1
+                        review.online = true
+                    }
                 }
                 return@withContext sent
             } catch (error: Exception) {
-                return@withContext 5
+                return@withContext 0
             }
         }
     }
 
-    suspend fun sendReview(review : GameReview,context : Context):Boolean{
+    @SuppressLint("SuspiciousIndentation")
+    suspend fun sendReview( context : Context, review : GameReview):Boolean{
         return withContext(Dispatchers.IO) {
             var response = false
             for(games in AccountApiConfig.favoriteGames!!){
@@ -85,8 +91,9 @@ object GameReviewsRepository {
 
     suspend fun getReviewsForGame(igdb_id :Int):List<GameReview>{
         return withContext(Dispatchers.IO) {
-            val response = ReviewsApiConfig.ApiAdapter.retrofit.getReview(igdb_id,AccountApiConfig.accountHash).body()
-            if(response?.isEmpty() == true)return@withContext emptyList()
+            val response = ReviewsApiConfig.ApiAdapter.retrofit.getReview(igdb_id).body()
+            if(response?.isEmpty() == true)
+                return@withContext emptyList()
             else  return@withContext response!!
         }
     }

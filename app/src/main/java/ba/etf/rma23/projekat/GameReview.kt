@@ -7,9 +7,10 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class GameReview(
-    @PrimaryKey @SerializedName("Gameid") val gameId: Int?,
+    @PrimaryKey val id : Int?,
     @ColumnInfo("review") @SerializedName("review") val review: String?,
-    @ColumnInfo("rating") @SerializedName("rating") val rating: Int?,
+    @ColumnInfo("igdb_id") @SerializedName("Gameid") val gameId: Int?,
     @ColumnInfo("online") var online : Boolean = false,
-    @SerializedName("timestamp") val timestamp: Long?
+    @ColumnInfo("rating") @SerializedName("rating") val rating: String?,
+    @SerializedName("timestamp") val timestamp: String
 )

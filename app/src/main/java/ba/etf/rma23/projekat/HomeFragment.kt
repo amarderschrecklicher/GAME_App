@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ba.etf.rma23.projekat.data.repositories.AccountApiConfig
 import ba.etf.rma23.projekat.data.repositories.AccountGamesRepository
+import ba.etf.rma23.projekat.data.repositories.GameReviewsRepository
 import ba.etf.rma23.projekat.data.repositories.GamesRepository
 import kotlinx.coroutines.*
 
@@ -80,7 +81,6 @@ open class HomeFragment : Fragment() {
     private fun showGameDetails(game: Game) {
         gameToShowDetails = game
         val listener = context as DataListener
-
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             listener.showDetails()
          else listener.refreshDetails(game)

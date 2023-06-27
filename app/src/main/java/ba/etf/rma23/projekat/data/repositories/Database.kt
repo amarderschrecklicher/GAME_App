@@ -8,7 +8,7 @@ import ba.etf.rma23.projekat.GameReview
 @androidx.room.Database(entities = arrayOf(GameReview::class), version = 1)
 abstract class Database : RoomDatabase() {
 
-    abstract fun reviewDAO(): ReviewDAO
+    abstract fun reviewDAO(): GameReviewDao
 
     companion object {
         private var INSTANCE: Database? = null

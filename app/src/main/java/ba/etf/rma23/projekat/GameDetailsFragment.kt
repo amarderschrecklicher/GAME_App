@@ -1,5 +1,8 @@
 package ba.etf.rma23.projekat
 
+import android.annotation.SuppressLint
+import android.app.Application
+import android.content.ContentProvider
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,8 +13,15 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider
 import ba.etf.rma23.projekat.HomeFragment.Companion.gameToShowDetails
+import ba.etf.rma23.projekat.data.repositories.Database
+import ba.etf.rma23.projekat.data.repositories.GameReviewsRepository
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class GameDetailsFragment : Fragment() {
     private lateinit var game : Game
@@ -57,7 +67,9 @@ class GameDetailsFragment : Fragment() {
         return view;
     }
 
+      @SuppressLint("SuspiciousIndentation")
       fun populateDetails() {
+        getReviews(gameToShowDetails!!)
         game = gameToShowDetails!!
         gameTitle.text=game.name
         gameDate.text= game?.releaseDate
@@ -67,16 +79,32 @@ class GameDetailsFragment : Fragment() {
         gameDeveloper.text = game?.developer
         gamePublisher.text = game?.developer
         gameDescription.text = game?.description
-
         reviewsAdapter = CommentsAdapter(arrayListOf())
         reviewsList.adapter = reviewsAdapter
-//        reviewsAdapter.updateImpression(gameToShowDetails!!.userImpressions!!.sortedByDescending { it.timestamp } )
+        game.userImpressions?.let { reviewsAdapter.updateImpression(it) }
         gameToShowDetails = game
         val context: Context = gameLogo.context
           Glide.with(context).load("https:" + game.attributesImage!!).into(gameLogo)
 
 }
+    private fun getReviews(game : Game) {
+        val scope = CoroutineScope(Job() + Dispatchers.Main)
+        scope.launch {
+            val reviews = GameReviewsRepository.getReviewsForGame(game.id)
+            var list: ArrayList<UserImpression> = ArrayList()
+                for (review in reviews) {
+                    if (review.rating != null) {
+                        list.add(UserRating(review.id.toString(),review.timestamp.toLong(),review.rating.toDouble() * 1.0))
+                    }
+                    if (review.review != null) {
+                        list.add(UserReview(review.id.toString(), review.timestamp.toLong(), review.review))
+                    }
+                }
+            gameToShowDetails!!.userImpressions = list
+            //    val db = Database.getInstance(requireContext())
+              //  db!!.reviewDAO().insertAll(GameReview(0,"",1,false,"",""))
 
-
+            }
+        }
 
 }

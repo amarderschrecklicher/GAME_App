@@ -1,5 +1,6 @@
 package ba.etf.rma23.projekat
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ class CommentsAdapter (
     private var impression: List<UserImpression>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
        return if(viewType == 0) {

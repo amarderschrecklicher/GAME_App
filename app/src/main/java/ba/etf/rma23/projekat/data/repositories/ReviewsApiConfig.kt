@@ -17,7 +17,7 @@ class ReviewsApiConfig {
         suspend fun addReview(@Path("gid",) gameId: Int, @Path("accountHash")accountHash: String,@Body review : GameReview) : Response<GameReview>
 
         @GET("game/{gid}/gamereviews")
-        suspend fun getReview(@Path("gid",) gameId: Int, @Path("accountHash") accountHash: String): Response<List<GameReview>>
+        suspend fun getReview(@Path("gid",) gameId: Int): Response<List<GameReview>>
 
         @DELETE("account/{accountHash}/gamereviews")
         suspend fun deleteReview(@Path("accountHash") accountHash: String): Response<GameReview>

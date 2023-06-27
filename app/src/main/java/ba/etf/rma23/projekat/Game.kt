@@ -14,7 +14,7 @@ data class Game(
     var genre: String?,
     @SerializedName("summary") val description: String?,
     var fav: String?,
-    val userImpressions: List<UserImpression>?,
+    var userImpressions: List<UserImpression>? = emptyList(),
     var favorite: Boolean = false,
     @SerializedName("platforms") val platforms: List<Attributes>? = null,
     @SerializedName("release_dates") val releaseDates: List<Attributes>?=null,

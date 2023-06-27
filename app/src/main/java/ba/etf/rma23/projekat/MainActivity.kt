@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity(), DataListener {
 
     override fun refreshDetails(item: Game) {
         val details = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_land) as NavHostFragment
-   //     val destination = GameDetailsFragmentDirections.test()
-     //   details.navController.navigate(destination)
+        val destination = GameDetailsFragmentDirections.test()
+        details.navController.navigate(destination)
     }
 
     override fun showDetails() {
