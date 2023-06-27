@@ -1,6 +1,7 @@
 package ba.etf.rma23.projekat.data.repositories
 
 import ba.etf.rma23.projekat.AddGame
+import ba.etf.rma23.projekat.AddReview
 import ba.etf.rma23.projekat.FavoriteGame
 import ba.etf.rma23.projekat.Game
 import ba.etf.rma23.projekat.GameReview
@@ -14,7 +15,7 @@ class ReviewsApiConfig {
     interface Api {
 
         @POST("account/{accountHash}/game/{gid}/gamereview")
-        suspend fun addReview(@Path("gid",) gameId: Int, @Path("accountHash")accountHash: String,@Body review : GameReview) : Response<GameReview>
+        suspend fun addReview( @Path("accountHash")accountHash: String,@Path("gid",) gameId: String,@Body review : AddReview) : Response<GameReview>
 
         @GET("game/{gid}/gamereviews")
         suspend fun getReview(@Path("gid",) gameId: Int): Response<List<GameReview>>

@@ -1,5 +1,6 @@
 package ba.etf.rma23.projekat
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.net.ConnectivityManager
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ba.etf.rma23.projekat.data.repositories.AccountApiConfig
 import ba.etf.rma23.projekat.data.repositories.AccountGamesRepository
+import ba.etf.rma23.projekat.data.repositories.Database
 import ba.etf.rma23.projekat.data.repositories.GameReviewsRepository
 import ba.etf.rma23.projekat.data.repositories.GamesRepository
 import kotlinx.coroutines.*
@@ -34,6 +36,7 @@ open class HomeFragment : Fragment() {
     private lateinit var gamesAdapter: GameListAdapter
 
 
+     @SuppressLint("SuspiciousIndentation")
      override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,8 +57,9 @@ open class HomeFragment : Fragment() {
          gamesAdapter = GameListAdapter(arrayListOf()) { game -> showGameDetails(game) }
          allGames.adapter=gamesAdapter
 
-         if(hasInternetConnection(requireContext()))
-         getFavorites()
+         if(hasInternetConnection(requireContext())) {
+             getFavorites()
+         }
 
         favoriteBox.setOnCheckedChangeListener {
                 _, isChecked ->

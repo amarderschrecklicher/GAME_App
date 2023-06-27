@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class AddReview(
     @SerializedName("review") val review: String?,
-    @SerializedName("rating") val nating: Double?
+    @SerializedName("rating") val rating: Int?
 )

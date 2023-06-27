@@ -94,14 +94,16 @@ class GameDetailsFragment : Fragment() {
             var list: ArrayList<UserImpression> = ArrayList()
                 for (review in reviews) {
                     if (review.rating != null) {
-                        list.add(UserRating(review.id.toString(),review.timestamp.toLong(),review.rating.toDouble() * 1.0))
+                        list.add(UserRating(review.id.toString(),review.timestamp.toLong(),
+                            review.rating!!.toDouble() * 1.0))
                     }
                     if (review.review != null) {
-                        list.add(UserReview(review.id.toString(), review.timestamp.toLong(), review.review))
+                        list.add(UserReview(review.id.toString(), review.timestamp.toLong(),
+                            review.review!!
+                        ))
                     }
                 }
             gameToShowDetails!!.userImpressions = list
-
             }
         }
 
