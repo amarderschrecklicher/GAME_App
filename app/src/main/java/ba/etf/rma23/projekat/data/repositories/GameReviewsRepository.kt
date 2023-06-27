@@ -28,7 +28,7 @@ object GameReviewsRepository {
                 val reviews = getOfflineReviews(context)
 
                 for(review in reviews) {
-                   ReviewsApiConfig.ApiAdapter.retrofit.addReview(review.gameId!!,AccountApiConfig.accountHash,review).isSuccessful
+                  if(sendReview(context,review))
                         sent += 1
                         val db = Database.getInstance(context)
                         db.reviewDAO().update(true, review.id!!)

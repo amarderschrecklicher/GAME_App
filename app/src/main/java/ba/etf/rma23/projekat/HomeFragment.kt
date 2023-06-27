@@ -54,6 +54,7 @@ open class HomeFragment : Fragment() {
          gamesAdapter = GameListAdapter(arrayListOf()) { game -> showGameDetails(game) }
          allGames.adapter=gamesAdapter
 
+         if(hasInternetConnection(requireContext()))
          getFavorites()
 
         favoriteBox.setOnCheckedChangeListener {
@@ -125,4 +126,12 @@ open class HomeFragment : Fragment() {
          return GamesRepository.sortGames()
     }
 
+    fun hasInternetConnection(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val network = connectivityManager.activeNetwork
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+        return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
+
+    }
 }
